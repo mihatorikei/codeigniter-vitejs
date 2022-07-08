@@ -2,6 +2,14 @@
     "name": "mihtori/codeignitervite",
     "description": "Integrte viteJs in codeiginter4 framework",
     "license": "MIT",
+    "type": "library",
+    "homepage": "https://github.com/firtadokei/codeigniter-vitejs",
+    "keywords": [
+        "codeigniter-viteJs",
+        "codeigniter-vueJs",
+        "codeigniter-reactJs"
+        "codeigniter-reactJs"
+    ],
     "authors": [
         {
             "name": "Mihatori Kei",
@@ -11,5 +19,12 @@
     ],
     "require": {
         "php": "^7.4 || ^8.0"
-    }
+    },
+    "autoload": {
+        "psr-4": {
+            "Mihatori\\CodeigniterVite\\": "src"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
 }
