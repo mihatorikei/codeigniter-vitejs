@@ -1,0 +1,15 @@
+{
+    "name": "mihtori/codeignitervite",
+    "description": "Integrte viteJs in codeiginter4 framework",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mihatori Kei",
+            "email": "mihatorikei@gmail.com",
+            "homepage": "https://github.com/firtadokei"
+        }
+    ],
+    "require": {
+        "php": "^7.4 || ^8.0"
+    }
+}
