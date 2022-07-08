@@ -1,5 +1,5 @@
 <div align="center">
-	<img width="250px" src="codeigniter-vite.svg">
+	<img width="200px" src="src/logo.svg">
   	<h1>Codeigniter viteJs</h1>
   	<p>Vitejs Integration For Codeigniter4</p>
 	<hr />
