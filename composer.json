@@ -5,8 +5,11 @@
     "type": "library",
     "homepage": "https://github.com/firtadokei/codeigniter-vitejs",
     "keywords": [
+<<<<<<< HEAD
         "codeigniter",
         "codeigniter4",
+=======
+>>>>>>> d2d4e2e3e320c88ef9097ce865f6547e504dfb6d
         "codeigniter-viteJs",
         "codeigniter-vueJs",
         "codeigniter-reactJs",
@@ -29,4 +32,8 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> d2d4e2e3e320c88ef9097ce865f6547e504dfb6d
