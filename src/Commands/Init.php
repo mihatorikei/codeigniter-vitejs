@@ -134,9 +134,12 @@ class Init extends BaseCommand
         # Define framework.
         if ($this->framework !== 'none')
         {
+            # Get .env content.
             $envContent = file_get_contents($envFile);
+
             # Set framework.
             $updates = str_replace("VITE_FRAMEWORK='none'", "VITE_FRAMEWORK='$this->framework'", $envContent);
+
             # React entry file (main.jsx).
             if ($this->framework !== 'react')
             {
