@@ -134,8 +134,15 @@ class Init extends BaseCommand
         # Define framework.
         if ($this->framework !== 'none')
         {
-            $updates = file_get_contents($envFile);
-            $updates = str_replace("VITE_FRAMEWORK='none'", "VITE_FRAMEWORK='$this->framework'", $updates);
+            $envContent = file_get_contents($envFile);
+            # Set framework.
+            $updates = str_replace("VITE_FRAMEWORK='none'", "VITE_FRAMEWORK='$this->framework'", $envContent);
+            # React entry file (main.jsx).
+            if ($this->framework !== 'react')
+            {
+                $updates = str_replace("VITE_ENTRY_FILE='main.js'", "VITE_ENTRY_FILE='main.jsx'", $envContent);
+            }
+
             file_put_contents($envFile, $updates);
         }
 
