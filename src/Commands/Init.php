@@ -113,11 +113,14 @@ class Init extends BaseCommand
         # Get the env file.
         $envFile = ROOTPATH . '.env';
 
+        # For backup.
+        $backupFile = '-BACKUP-' . time();
+
         # Does exist? if not, generate it =)
         if (is_file($envFile))
         {
             # But first, let's take a backup.
-            copy($envFile, $envFile . 'BACKUP-' . time());
+            copy($envFile, $envFile . $backupFile);
 
             # Get .env.default content
             $content = file_get_contents($this->path . 'Config/env.default');
@@ -130,6 +133,11 @@ class Init extends BaseCommand
             # As we said before, generate it.
             copy($this->path . 'Config/env.default', ROOTPATH . '.env');
         }
+
+        # set the backup file.
+        $envContent = file_get_contents(ROOTPATH . '.env');
+        $backupUpdate = str_replace('VITE_BACKUP_FILE=', "VITE_BACKUP_FILE='$backupFile'", $envContent);
+        file_put_contents($envFile, $backupUpdate);
 
         # Define framework.
         if ($this->framework !== 'none')
