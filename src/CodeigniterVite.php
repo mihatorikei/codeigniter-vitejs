@@ -4,6 +4,17 @@ namespace Mihatori\CodeigniterVite;
 
 class CodeigniterVite
 {
+
+    /**
+     * @var string manifest path.
+     */
+    private static $manifest;
+
+    public function __construct()
+    {
+        static::$manifest = is_file(FCPATH . 'manifest.json') ? FCPATH . 'manifest.json' : null;
+    }
+
     /**
      * Get vite entry file on running or bundled files instead.
      * 
@@ -23,10 +34,10 @@ class CodeigniterVite
         }
 
         # If vite isn't running, then return the compiled resources.
-        if (empty($result) && static::manifest())
+        if (empty($result) && static::$manifest)
         {
             # Get the manifest content.
-            $manifest = file_get_contents(static::manifest());
+            $manifest = file_get_contents(static::$manifest);
             # You look much pretty as an php object =).
             $manifest = json_decode($manifest);
 
@@ -66,13 +77,5 @@ class CodeigniterVite
         }
 
         return null;
-    }
-
-    /**
-     * @return string manifest path
-     */
-    private static function manifest()
-    {
-        return is_file(FCPATH . 'manifest.json') ? FCPATH . 'manifest.json' : null;
     }
 }
