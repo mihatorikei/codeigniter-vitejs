@@ -10,7 +10,8 @@
         "codeigniter-viteJs",
         "codeigniter-vueJs",
         "codeigniter-reactJs",
-        "codeigniter-svelteJs"
+        "codeigniter-svelteJs",
+        "codeigniter spa"
     ],
     "authors": [
         {
