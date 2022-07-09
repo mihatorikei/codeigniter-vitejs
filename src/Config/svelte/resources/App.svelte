@@ -1,6 +1,6 @@
 
 <main>
-  Codeigniter-vite Svelte is running
+  Codeigniter-vite Svelte
 </main>
 
 <style>
