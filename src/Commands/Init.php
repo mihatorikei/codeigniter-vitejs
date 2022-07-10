@@ -9,7 +9,7 @@ use Throwable;
 
 class Init extends BaseCommand
 {
-    protected $group        = 'Modules';
+    protected $group        = 'Codeigniter Vite';
     protected $name         = 'vite:init';
     protected $description  = 'Initialize codeigniter vite module';
 

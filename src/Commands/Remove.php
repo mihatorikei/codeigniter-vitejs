@@ -9,7 +9,7 @@ use Throwable;
 
 class Remove extends BaseCommand
 {
-    protected $group        = 'Modules';
+    protected $group        = 'Codeigniter Vite';
     protected $name         = 'vite:remove';
     protected $description  = 'Remove codeigniter vite generated files and settings';
 
