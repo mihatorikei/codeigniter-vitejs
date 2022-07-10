@@ -78,4 +78,30 @@ class CodeigniterVite
 
         return null;
     }
+
+    /**
+     * Check if the vite is running or manifest does exist.
+     * 
+     * @return bool true if vite is runnig or if manifest does exist, otherwise false;
+     */
+    public static function check(): bool
+    {
+        # Check if vite is running.
+        $entryFile = env('VITE_ORIGIN') . '/' . env('VITE_RESOURCES_DIR') . '/' . env('VITE_ENTRY_FILE');
+
+        if (@file_get_contents($entryFile))
+        {
+            $result = true;
+        }
+        elseif (!empty(static::$manifest))
+        {
+            $result = true;
+        }
+        else
+        {
+            $result = false;
+        }
+
+        return $result;
+    }
 }

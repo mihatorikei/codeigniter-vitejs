@@ -114,13 +114,13 @@ class Init extends BaseCommand
         $envFile = ROOTPATH . '.env';
 
         # For backup.
-        $backupFile = '-BACKUP-' . time();
+        $backupFile = 'env-BACKUP-' . time();
 
         # Does exist? if not, generate it =)
         if (is_file($envFile))
         {
             # But first, let's take a backup.
-            copy($envFile, $envFile . $backupFile);
+            copy($envFile, ROOTPATH . $backupFile);
 
             # Get .env.default content
             $content = file_get_contents($this->path . 'Config/env.default');

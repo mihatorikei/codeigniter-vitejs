@@ -37,7 +37,7 @@ class Remove extends BaseCommand
      */
     private function removeFrameworkFiles()
     {
-        CLI::write('⚡ Removing vite files...', 'yellow');
+        CLI::write('Removing vite files...', 'yellow');
         CLI::newLine();
 
         # First vite.config.js
@@ -52,10 +52,6 @@ class Remove extends BaseCommand
             $publisher = new Publisher(null, ROOTPATH . 'resources');
             $publisher->wipe();
         }
-
-        CLI::newLine();
-        CLI::write('Deleted ✅', 'green');
-        CLI::newLine();
     }
 
     /**
@@ -74,7 +70,7 @@ class Remove extends BaseCommand
         $backupFile = ROOTPATH . env('VITE_BACKUP_FILE');
 
         # Does exist? if not, generate it =)
-        if (is_file($envFile))
+        if (is_file($backupFile))
         {
             # Remove current .env
             unlink($envFile);
@@ -85,9 +81,5 @@ class Remove extends BaseCommand
                 unlink($backupFile);
             }
         }
-
-        # env updated.
-        CLI::write('.env file updated ✅', 'green');
-        CLI::newLine();
     }
 }
