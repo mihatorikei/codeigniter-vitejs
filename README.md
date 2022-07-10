@@ -1,7 +1,49 @@
 <div align="center">
-	<img width="180px" src="src/logo.svg">
-  	<h1>Codeigniter viteJs</h1>
+	<img width="160px" src="src/logo.svg">
+  	<h1>Codeigniter + viteJs</h1>
   	<p>Vitejs Integration For Codeigniter4</p>
-	<hr />
-	<h2>🚧 W.I.P 🚧</h2>
 </div>
+
+## Features:
+ - ⏱️ Almost zero configuration
+ - 🧩 Easy to install and remove
+ - 🔨 Easy to customize
+ - ✌️ Support most used frameworks: `react`, `vue`, and `svlete`
+ - 🔥 Enjoy hot module replacement (HMR)
+ 
+## Installation:
+
+> As codeigniter4, make sure php ^7.4 is installed
+
+```
+composer require mihatori/codeignitervite
+```
+
+then from your project root, run:
+
+```
+php spark vite:init --framework <framework>
+```
+
+replace `<framework>` with `vue`, `react`, `svelte`, or `none`
+
+or you can just run:
+
+```
+php spark vite:init
+```
+
+our body spark will handle the rest for you 🙃
+
+**That's it**
+you can now run `npm install`, `npm run dev` and enjoy your time
+
+## What next?
+More informations will be availiable as soon as possible ❤️.
+
+### additional:
+You will find som new vaiables in your .env file, you can change them as you like.
+
+## License
+
+MIT License &copy; 2022 [Mihatori Kei](https://github.com/firtadokei)
