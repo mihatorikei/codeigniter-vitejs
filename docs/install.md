@@ -4,8 +4,6 @@
 >  IMPORTANT: 🚧 THIS DOCUMENTATION IS NOT YET COMPLETE (UNSTABLE) 🚧
 
 
-
-
 These instructions assume that you have already installed [composer](https://getcomposer.org/download/) and [CodeIgniter 4 app starter](https://codeigniter.com/user_guide/installation/installing_composer.html).
 
 from your project root run:
