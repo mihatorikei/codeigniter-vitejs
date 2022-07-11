@@ -34,7 +34,7 @@ class Init extends BaseCommand
     public function run(array $params)
     {
         # Module start.
-        CLI::write('Installing Codeigniter Vite Plugin 🔥⚡', 'white', 'cyan');
+        CLI::write('Initializing Codeigniter Vite Plugin 🔥⚡', 'white', 'cyan');
         CLI::newLine();
 
         # Set framework.
@@ -58,7 +58,7 @@ class Init extends BaseCommand
         $this->updateEnvFile();
 
         # Everything is ready now.
-        CLI::write('Codeigniter vite has succussfuly installed ✅', 'green');
+        CLI::write('Codeigniter vite initialized successfully ✅', 'green');
         CLI::newLine();
         CLI::write('run: npm install && npm run dev');
         CLI::newLine();
