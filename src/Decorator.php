@@ -17,10 +17,13 @@ class Decorator implements ViewDecoratorInterface
             # Insert tags just before "</head>" tag.
             $html = empty($tags) ? $html : str_replace('</head>', "\n\t$tags\n</head>", $html);
 
-            # Insert app id just after body tag
-            $html = empty($tags) ? $html : str_replace('<body>', "<body>\n\t<div id=\"app\">", $html);
-            # Close it.
-            $html = empty($tags) ? $html : str_replace('</body>', "\n\t</div>\n</body>", $html);
+            if (env('VITE_ADD_APP_ID') == "true")
+            {
+                # Insert app id just after body tag
+                $html = empty($tags) ? $html : str_replace('<body>', "<body>\n\t<div id=\"app\">", $html);
+                # Close it.
+                $html = empty($tags) ? $html : str_replace('</body>', "\n\t</div>\n</body>", $html);
+            }
         }
 
         # If not, then just return the html as it is.
