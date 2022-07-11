@@ -13,8 +13,6 @@
  
 ## Installation:
 
-> As codeigniter4, make sure php ^7.4 is installed
-
 ```
 composer require mihatori/codeignitervite
 ```
