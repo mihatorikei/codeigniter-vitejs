@@ -12,7 +12,7 @@ class CodeigniterVite
 
     public function __construct()
     {
-        static::$manifest = is_file(FCPATH . 'manifest.json') ? FCPATH . 'manifest.json' : null;
+        self::$manifest = is_file(FCPATH . 'manifest.json') ? FCPATH . 'manifest.json' : null;
     }
 
     /**
@@ -30,14 +30,14 @@ class CodeigniterVite
         # React HMR fix.
         if (!empty($result))
         {
-            $result = static::getReactTag() . "$result";
+            $result = self::getReactTag() . "$result";
         }
 
         # If vite isn't running, then return the compiled resources.
-        if (empty($result) && static::$manifest)
+        if (empty($result) && self::$manifest)
         {
             # Get the manifest content.
-            $manifest = file_get_contents(static::$manifest);
+            $manifest = file_get_contents(self::$manifest);
             # You look much pretty as an php object =).
             $manifest = json_decode($manifest);
 
@@ -93,7 +93,7 @@ class CodeigniterVite
         {
             $result = true;
         }
-        elseif (!empty(static::$manifest))
+        elseif (!empty(self::$manifest))
         {
             $result = true;
         }
