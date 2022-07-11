@@ -31,7 +31,7 @@ or you can just run:
 php spark vite:init
 ```
 
-our body ```spark``` will handle the rest for you 🙃
+our body `spark` will handle the rest for you 🙃
 
 💥 **That's it**
 you can now run `npm install`, `npm run dev` and enjoy your time
@@ -42,13 +42,16 @@ You can run the following command to uninitialize it:
 ```
 php spark vite:remove
 ```
-then you can run ``` composer remove mihatori/codeignitervite ``` to remove it completely.
+then you can run ` composer remove mihatori/codeignitervite ` to remove it completely.
+
+### additional:
+You will find som new vaiables in your `.env` file, you can change them as you like.
+
+## Contributing
+All contributions are welcome, it doesn't matter whether you can code, write documentation, or help find bugs.
 
 ## What next?
 More informations will be available as soon as possible ❤️.
-
-### additional:
-You will find som new vaiables in your .env file, you can change them as you like.
 
 ## License
 
