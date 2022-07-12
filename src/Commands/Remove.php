@@ -46,6 +46,9 @@ class Remove extends BaseCommand
         # package.json
         is_file(ROOTPATH . 'package.json') ? unlink(ROOTPATH . 'package.json') : CLI::error('package.json does not exist');
 
+        # Remove package-lock.json
+        is_file(ROOTPATH . 'package-lock.json') ? unlink(ROOTPATH . 'package-lock.json') : CLI::error('package-lock.json does not exist');
+
         # Empty resources dir.
         if (is_dir(ROOTPATH . 'resources'))
         {
