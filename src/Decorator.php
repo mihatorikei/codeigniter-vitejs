@@ -8,11 +8,13 @@ class Decorator implements ViewDecoratorInterface
 {
     public static function decorate(string $html): string
     {
+        $vite = new CodeigniterVite();
+
         # Check if vite is running or manifest is ready.
-        if (CodeigniterVite::check())
+        if ($vite->check())
         {
             # Get generated js and css tags.
-            $tags = CodeigniterVite::tags();
+            $tags = $vite->tags();
 
             # Insert tags just before "</head>" tag.
             $html = empty($tags) ? $html : str_replace('</head>', "\n\t$tags\n</head>", $html);

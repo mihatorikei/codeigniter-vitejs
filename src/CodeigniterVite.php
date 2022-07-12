@@ -8,11 +8,11 @@ class CodeigniterVite
     /**
      * @var string manifest path.
      */
-    private static $manifest;
+    private $manifest;
 
     public function __construct()
     {
-        self::$manifest = is_file(FCPATH . 'manifest.json') ? FCPATH . 'manifest.json' : null;
+        $this->manifest = is_file(FCPATH . 'manifest.json') ? FCPATH . 'manifest.json' : null;
     }
 
     /**
@@ -20,7 +20,7 @@ class CodeigniterVite
      * 
      * @return string single script tag on developing and much more on production
      */
-    public static function tags()
+    public function tags()
     {
         # Check if vite is running.
         $entryFile = env('VITE_ORIGIN') . '/' . env('VITE_RESOURCES_DIR') . '/' . env('VITE_ENTRY_FILE');
@@ -30,14 +30,14 @@ class CodeigniterVite
         # React HMR fix.
         if (!empty($result))
         {
-            $result = self::getReactTag() . "$result";
+            $result = $this->getReactTag() . "$result";
         }
 
         # If vite isn't running, then return the compiled resources.
-        if (empty($result) && self::$manifest)
+        if (empty($result) && $this->manifest)
         {
             # Get the manifest content.
-            $manifest = file_get_contents(self::$manifest);
+            $manifest = file_get_contents($this->manifest);
             # You look much pretty as an php object =).
             $manifest = json_decode($manifest);
 
@@ -67,7 +67,7 @@ class CodeigniterVite
      * 
      * @return string|null a simple module script
      */
-    public static function getReactTag()
+    public function getReactTag()
     {
         if (env('VITE_FRAMEWORK') === 'react')
         {
@@ -84,7 +84,7 @@ class CodeigniterVite
      * 
      * @return bool true if vite is runnig or if manifest does exist, otherwise false;
      */
-    public static function check(): bool
+    public function check(): bool
     {
         # Check if vite is running.
         $entryFile = env('VITE_ORIGIN') . '/' . env('VITE_RESOURCES_DIR') . '/' . env('VITE_ENTRY_FILE');
@@ -93,7 +93,7 @@ class CodeigniterVite
         {
             $result = true;
         }
-        elseif (!empty(self::$manifest))
+        elseif (!empty($this->manifest))
         {
             $result = true;
         }
