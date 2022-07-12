@@ -8,19 +8,14 @@ class CodeigniterVite
     /**
      * @var string manifest path.
      */
-    private $manifest;
-
-    public function __construct()
-    {
-        $this->manifest = is_file(FCPATH . 'manifest.json') ? FCPATH . 'manifest.json' : null;
-    }
+    private static $manifest = FCPATH . 'manifest.json';
 
     /**
      * Get vite entry file on running or bundled files instead.
      * 
      * @return string single script tag on developing and much more on production
      */
-    public function tags()
+    public static function tags(): ?string
     {
         # Check if vite is running.
         $entryFile = env('VITE_ORIGIN') . '/' . env('VITE_RESOURCES_DIR') . '/' . env('VITE_ENTRY_FILE');
@@ -30,14 +25,14 @@ class CodeigniterVite
         # React HMR fix.
         if (!empty($result))
         {
-            $result = $this->getReactTag() . "$result";
+            $result = self::getReactTag() . "$result";
         }
 
         # If vite isn't running, then return the compiled resources.
-        if (empty($result) && $this->manifest)
+        if (empty($result) && is_file(self::$manifest))
         {
             # Get the manifest content.
-            $manifest = file_get_contents($this->manifest);
+            $manifest = file_get_contents(self::$manifest);
             # You look much pretty as an php object =).
             $manifest = json_decode($manifest);
 
@@ -67,7 +62,7 @@ class CodeigniterVite
      * 
      * @return string|null a simple module script
      */
-    public function getReactTag()
+    public static function getReactTag(): ?string
     {
         if (env('VITE_FRAMEWORK') === 'react')
         {
@@ -84,22 +79,23 @@ class CodeigniterVite
      * 
      * @return bool true if vite is runnig or if manifest does exist, otherwise false;
      */
-    public function check(): bool
+    public static function check(): bool
     {
         # Check if vite is running.
         $entryFile = env('VITE_ORIGIN') . '/' . env('VITE_RESOURCES_DIR') . '/' . env('VITE_ENTRY_FILE');
 
-        if (@file_get_contents($entryFile))
+        switch (true)
         {
-            $result = true;
-        }
-        elseif (!empty($this->manifest))
-        {
-            $result = true;
-        }
-        else
-        {
-            $result = false;
+            case @file_get_contents($entryFile):
+                $result = true;
+                break;
+            case !empty(self::$manifest):
+                $result = true;
+                break;
+
+            default:
+                $result = false;
+                break;
         }
 
         return $result;
