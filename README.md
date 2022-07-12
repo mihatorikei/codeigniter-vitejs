@@ -51,7 +51,7 @@ php spark vite:remove
 then you can run ` composer remove mihatori/codeignitervite ` to remove it completely.
 
 ### additional:
-You will find som new vaiables in your `.env` file, you can change them as you like.
+You will find som new variables in your `.env` file, you can change them as you like.
 
 ## Contributing
 All contributions are welcome, it doesn't matter whether you can code, write documentation, or help find bugs.
