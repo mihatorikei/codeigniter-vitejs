@@ -9,21 +9,22 @@ class Decorator implements ViewDecoratorInterface
     public static function decorate(string $html): string
     {
         # Check if vite is running or manifest is ready.
-        if (CodeigniterVite::check())
+        if (Vite::isReady() && env('VITE_AUTO_INJECTING'))
         {
             # Get generated js and css tags.
-            $tags = CodeigniterVite::tags();
+            $tags = Vite::tags();
 
-            # Insert tags just before "</head>" tag.
-            $html = empty($tags) ? $html : str_replace('</head>', "\n\t$tags\n</head>", $html);
+            $findAndReplace = [
+                # Generated js and css tags.
+                '</head>'   => "\n\t$tags\n</head>",
+                # app div
+                '<body>'    => "<body>\n\t<div id=\"app\">",
+                # Closing app div.
+                '</body>'   => "\n\t</div>\n</body>"
+            ];
 
-            if (env('VITE_ADD_APP_ID') == "true")
-            {
-                # Insert app id just after body tag
-                $html = empty($tags) ? $html : str_replace('<body>', "<body>\n\t<div id=\"app\">", $html);
-                # Close it.
-                $html = empty($tags) ? $html : str_replace('</body>', "\n\t</div>\n</body>", $html);
-            }
+            # Insert tags just before "</head>" tag and a div with "app" id
+            $html = str_replace(array_keys($findAndReplace), array_values($findAndReplace), $html);
         }
 
         return $html;
