@@ -3,7 +3,7 @@
   	<h1>Codeigniter + viteJs</h1>
   	<p>Vitejs Integration For Codeigniter4</p>
 	<p>
-		<img src="https://custom-icon-badges.herokuapp.com/github/v/release/firtadokei/codeigniter-vitejs?logo=tag">
+		<a href="https://github.com/firtadokei/codeigniter-vitejs/releases"><img src="https://custom-icon-badges.herokuapp.com/github/v/release/firtadokei/codeigniter-vitejs?logo=tag"></a>
 		<img src="https://custom-icon-badges.herokuapp.com/packagist/stars/mihatori/codeignitervite?logo=star">
 		<img src="https://badges.hiptest.com:/packagist/dt/mihatori/codeignitervite?color=%23c700ff&logo=packagist&logoColor=%23c700ff">
 		<img src="https://custom-icon-badges.herokuapp.com/packagist/l/mihatori/codeignitervite?logo=law">
