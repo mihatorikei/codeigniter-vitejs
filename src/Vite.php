@@ -2,7 +2,7 @@
 
 namespace Mihatori\CodeigniterVite;
 
-class CodeigniterVite
+class Vite
 {
 
     /**
@@ -79,7 +79,7 @@ class CodeigniterVite
      * 
      * @return bool true if vite is runnig or if manifest does exist, otherwise false;
      */
-    public static function check(): bool
+    public static function isReady(): bool
     {
         # Check if vite is running.
         $entryFile = env('VITE_ORIGIN') . '/' . env('VITE_RESOURCES_DIR') . '/' . env('VITE_ENTRY_FILE');
