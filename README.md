@@ -10,6 +10,12 @@
 	</p>
 </div>
 
+<div align=center>
+
+[![CodeFactor](https://www.codefactor.io/repository/github/firtadokei/codeigniter-vitejs/badge/master)](https://www.codefactor.io/repository/github/firtadokei/codeigniter-vitejs/overview/master)
+
+</div>
+
 Codeigniter vite is a package that aims to integrate [vitejs](https://vitejs.dev/) with [codeigniter4](https://codeigniter.com/) in a simple way.
 
 ## Features:
