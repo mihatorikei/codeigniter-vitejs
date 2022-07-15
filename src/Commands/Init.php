@@ -11,7 +11,7 @@ class Init extends BaseCommand
 {
     protected $group        = 'Codeigniter Vite';
     protected $name         = 'vite:init';
-    protected $description  = 'Initialize codeigniter vite module';
+    protected $description  = 'Initialize codeigniter vite package';
 
     /**
      * @var string
@@ -34,7 +34,7 @@ class Init extends BaseCommand
     public function run(array $params)
     {
         # Module start.
-        CLI::write('Initializing Codeigniter Vite Plugin 🔥⚡', 'white', 'cyan');
+        CLI::write('Initializing Codeigniter Vite 🔥⚡', 'white', 'cyan');
         CLI::newLine();
 
         # Set framework.
@@ -114,7 +114,7 @@ class Init extends BaseCommand
         $envFile = ROOTPATH . '.env';
 
         # For backup.
-        $backupFile = 'env-BACKUP-' . time();
+        $backupFile = is_file($envFile) ? 'env-BACKUP-' . time() : null;
 
         # Does exist? if not, generate it =)
         if (is_file($envFile))
@@ -134,10 +134,13 @@ class Init extends BaseCommand
             copy($this->path . 'Config/env.default', ROOTPATH . '.env');
         }
 
-        # set the backup file.
-        $envContent = file_get_contents(ROOTPATH . '.env');
-        $backupUpdate = str_replace('VITE_BACKUP_FILE=', "VITE_BACKUP_FILE='$backupFile'", $envContent);
-        file_put_contents($envFile, $backupUpdate);
+        # set the backup name in the current one.
+        if ($backupFile)
+        {
+            $envContent = file_get_contents(ROOTPATH . '.env');
+            $backupUpdate = str_replace('VITE_BACKUP_FILE=', "VITE_BACKUP_FILE='$backupFile'", $envContent);
+            file_put_contents($envFile, $backupUpdate);
+        }
 
         # Define framework.
         if ($this->framework !== 'none')
