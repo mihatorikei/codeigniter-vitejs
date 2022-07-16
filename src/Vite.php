@@ -39,8 +39,14 @@ class Vite
             # Now, we will get all js files and css from the manifest.
             foreach ($manifest as $file)
             {
-                # Js files.
-                $result .= '<script type="module" src="/' . $file->file . '"></script>';
+                # Check extension
+                $fileExtension = substr($file->file, -3, 3);
+
+                # Generate js tag.
+                if ($fileExtension === '.js' && isset($file->isEntry) && $file->isEntry === true)
+                {
+                    $result .= '<script type="module" src="/' . $file->file . '"></script>';
+                }
 
                 if (!empty($file->css))
                 {
