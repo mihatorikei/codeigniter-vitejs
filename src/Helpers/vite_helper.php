@@ -5,9 +5,9 @@ use Mihatori\CodeigniterVite\Vite;
 /**
  * Get vite entry file or bundled files.
  * 
- * @return string|null
+ * @return array|null
  */
-function viteTags(): ?string
+function viteTags(): ?array
 {
     return Vite::tags();
 }

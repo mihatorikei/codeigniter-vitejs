@@ -11,20 +11,28 @@ class Decorator implements ViewDecoratorInterface
         # Check if vite is running or manifest is ready.
         if (Vite::isReady() && env('VITE_AUTO_INJECTING'))
         {
-            # Get generated js and css tags.
+            # First inject app div
+            $html = str_replace('<body>', "<body>\n\t<div id=\"app\">", $html);
+            # Close the div
+            $html = str_replace('</body>', "\n\t</div>\n</body>", $html);
+
+            # Get generated css.
             $tags = Vite::tags();
 
-            $findAndReplace = [
-                # Generated js and css tags.
-                '</head>'   => "\n\t$tags\n</head>",
-                # app div
-                '<body>'    => "<body>\n\t<div id=\"app\">",
-                # Closing app div.
-                '</body>'   => "\n\t</div>\n</body>"
-            ];
+            $jsTags  = $tags['js'];
 
-            # Insert tags just before "</head>" tag and a div with "app" id
-            $html = str_replace(array_keys($findAndReplace), array_values($findAndReplace), $html);
+            # now inject css
+            if (!empty($tags['css']))
+            {
+                $cssTags = $tags['css'];
+
+                $html = str_replace('</head>', "\n\t$cssTags\n", $html);
+                $html = str_replace('</body>', "\n\t$jsTags\n</body>", $html);
+            }
+            else
+            {
+                $html = str_replace('</head>', "\n\t$jsTags\n</head>", $html);
+            }
         }
 
         return $html;

@@ -13,27 +13,32 @@ class Vite
     /**
      * Get vite entry file on running or bundled files instead.
      * 
-     * @return string single script tag on developing and much more on production
+     * @return array single script tag on developing and much more on production
      */
-    public static function tags(): ?string
+    public static function tags(): ?array
     {
+        $result = [
+            'js'    => null,
+            'css'   => null
+        ];
+
         # Check if vite is running.
         $entryFile = env('VITE_ORIGIN') . '/' . env('VITE_RESOURCES_DIR') . '/' . env('VITE_ENTRY_FILE');
 
-        $result = @file_get_contents($entryFile) ? '<script type="module" src="' . $entryFile . '"></script>' : null;
+        $result['js'] = @file_get_contents($entryFile) ? '<script type="module" src="' . $entryFile . '"></script>' : null;
 
         # React HMR fix.
-        if (!empty($result))
+        if (!empty($result['js']))
         {
-            $result = self::getReactTag() . "$result";
+            $result['js'] = self::getReactTag() . $result['js'];
         }
 
-        # If vite isn't running, then return the compiled resources.
-        if (empty($result) && is_file(self::$manifest))
+        # If vite isn't running, then return the bundled resources.
+        if (empty($result['js']) && is_file(self::$manifest))
         {
             # Get the manifest content.
             $manifest = file_get_contents(self::$manifest);
-            # You look much pretty as an php object =).
+            # You look much pretty as a php object =).
             $manifest = json_decode($manifest);
 
             # Now, we will get all js files and css from the manifest.
@@ -45,14 +50,14 @@ class Vite
                 # Generate js tag.
                 if ($fileExtension === '.js' && isset($file->isEntry) && $file->isEntry === true)
                 {
-                    $result .= '<script type="module" src="/' . $file->file . '"></script>';
+                    $result['js'] .= '<script type="module" src="/' . $file->file . '"></script>';
                 }
 
                 if (!empty($file->css))
                 {
                     foreach ($file->css as $cssFile)
                     {
-                        $result .= '<link rel="stylesheet" href="/' . $cssFile . '" />';
+                        $result['css'] .= '<link rel="stylesheet" href="/' . $cssFile . '" />';
                     }
                 }
             }
