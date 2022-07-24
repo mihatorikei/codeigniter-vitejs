@@ -8,9 +8,14 @@ class Decorator implements ViewDecoratorInterface
 {
     public static function decorate(string $html): string
     {
-        # Check if vite is running or manifest is ready.
-        if (Vite::isReady() && env('VITE_AUTO_INJECTING'))
+        # Check whether vite is running or manifest is ready.
+        if (env('VITE_AUTO_INJECTING'))
         {
+            if (Vite::isReady() === false)
+            {
+                throw new \Exception('CodeignIter Vite package is installed, but not initialized. did you run "php spark vite:init" ?');
+            }
+
             # First inject app div
             $html = str_replace('<body>', "<body>\n\t<div id=\"app\">", $html);
             # Close the div

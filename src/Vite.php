@@ -86,13 +86,12 @@ class Vite
     }
 
     /**
-     * Check if the vite is running or manifest does exist.
+     * Check whether vite is running or manifest does exist.
      * 
      * @return bool true if vite is runnig or if manifest does exist, otherwise false;
      */
     public static function isReady(): bool
     {
-        # Check if vite is running.
         $entryFile = env('VITE_ORIGIN') . '/' . env('VITE_RESOURCES_DIR') . '/' . env('VITE_ENTRY_FILE');
 
         switch (true)
@@ -100,13 +99,12 @@ class Vite
             case @file_get_contents($entryFile):
                 $result = true;
                 break;
-            case !empty(self::$manifest):
+            case is_file(self::$manifest):
                 $result = true;
                 break;
 
             default:
                 $result = false;
-                break;
         }
 
         return $result;
