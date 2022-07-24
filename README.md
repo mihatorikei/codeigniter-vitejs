@@ -3,7 +3,9 @@
   	<h1>Codeigniter + viteJs</h1>
   	<p>Vitejs Integration For Codeigniter4</p>
 	<p>
-		<a href="https://github.com/firtadokei/codeigniter-vitejs/releases"><img src="https://custom-icon-badges.herokuapp.com/github/v/release/firtadokei/codeigniter-vitejs?logo=tag"></a>
+		<a href="https://github.com/firtadokei/codeigniter-vitejs/releases">
+			<img src="https://custom-icon-badges.herokuapp.com/github/v/release/firtadokei/codeigniter-vitejs?logo=tag">
+		</a>
 		<img src="https://custom-icon-badges.herokuapp.com/packagist/stars/mihatori/codeignitervite?logo=star">
 		<img src="https://badges.hiptest.com:/packagist/dt/mihatori/codeignitervite?color=%23c700ff&logo=packagist&logoColor=%23c700ff">
 		<img src="https://custom-icon-badges.herokuapp.com/packagist/l/mihatori/codeignitervite?logo=law">
@@ -74,14 +76,21 @@ php spark vite:remove
 This command will do the following:
 - delete `package.json`, `packages.lock.json` and `vite.config.js`.
 - delete `resources` folder.
-- And finaly restore your `.env` file.
+- And finally restore your `.env` file.
+
+## 🔥 Need a quick start?
+Check out our starter apps for [svelte](https://github.com/firtadokei/ci-svelte-appstarter) and [vue](https://github.com/firtadokei/ci-vue-appstarter).
+
+<a href="https://github.com/firtadokei/ci-svelte-appstarter">
+	<img width="120px" src="https://github.com/firtadokei/ci-svelte-appstarter/raw/master/ci-svelte.webp">
+</a>
+<a href="https://github.com/firtadokei/ci-vue-appstarter">
+	<img width="120px" src="https://github.com/firtadokei/ci-vue-appstarter/raw/master/ci-vue.webp">
+</a> 
 
 ## Contributing
 All contributions are welcome, it doesn't matter whether you can code, write documentation, or help find bugs.
 feel free to use issues or pull requests.
-
-## What next?
-More informations will be available as soon as possible ❤️.
 
 ## Support
 Unfortunately, I don't drink coffee 💔, but you can star it instead 🙃
