@@ -41,23 +41,44 @@ php spark vite:init
 
 our body `spark` will handle the rest for you 🙃
 
-💥 **That's it**
-you can now run `npm install`, `npm run dev` and enjoy
+## Getting Started:
+- Install your node dependencies: `npm install`
+- Start vite server: `npm run dev`
+- Start CI server: `php spark serve` or access it through your virtual host.
+- That's all =)
 
-## Uninitialize
-You can run the following command to uninitialize it:
+> **NOTE:**
+> 
+> `npm run dev` is not where you should work, it main purpose is to serve assets, such as scripts or stylesheets.
+> once you build your files, it becomes useless
+> but as long as it running, the package will use it instead of the bundled files.
+> So make sure to **access your project** from ci server or a vitual host.
+
+## Build your files:
+
+to bundle your files, run: 
+```
+npm run build
+```
+this command will generate the bundled assets in your public directory. 
+but as we said before, as long as vite server is running, the package will use it instead of bundled files, so make sure to stop it when you're done developing.
+
+## Uninitialize:
+
+`composer remove mihatori/codeignitervite` command will remove the package, but the generated files will remain there (package.json, vite.config.js ...etc).
+so to avoid that, make sure to run the following command first:
 
 ```
 php spark vite:remove
 ```
-then you can run `composer remove mihatori/codeignitervite` to remove it completely.
-
-### additional:
-You will find some new variables in your `.env` file, you can change them as you like.
+This command will do the following:
+- delete `package.json`, `packages.lock.json` and `vite.config.js`.
+- delete `resources` folder.
+- And finaly restore your `.env` file.
 
 ## Contributing
 All contributions are welcome, it doesn't matter whether you can code, write documentation, or help find bugs.
-feel free to use issues tracker or pull requests
+feel free to use issues or pull requests.
 
 ## What next?
 More informations will be available as soon as possible ❤️.
