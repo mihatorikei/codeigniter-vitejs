@@ -13,7 +13,7 @@ class Decorator implements ViewDecoratorInterface
         {
             if (Vite::isReady() === false)
             {
-                throw new \Exception('CodeignIter Vite package is installed, but not initialized. did you run "php spark vite:init" ?');
+                throw new \Exception('CodeIgniter Vite package is installed, but not initialized. did you run "php spark vite:init" ?');
             }
 
             # First inject app div
