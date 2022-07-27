@@ -5,11 +5,16 @@ use Mihatori\CodeigniterVite\Vite;
 /**
  * Get vite entry file or bundled files.
  * 
- * @return array|null
+ * @return string|null
  */
-function viteTags(): ?array
+function viteTags(string $assets): ?string
 {
-    return Vite::tags();
+    if (in_array($assets, ['js', 'css']))
+    {
+        return Vite::tags()[$assets];
+    }
+
+    return null;
 }
 
 /**
