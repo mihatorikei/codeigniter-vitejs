@@ -6,12 +6,13 @@
 		<a href="https://github.com/firtadokei/codeigniter-vitejs/releases">
 			<img src="https://custom-icon-badges.herokuapp.com/github/v/release/firtadokei/codeigniter-vitejs?logo=tag">
 		</a>
-		<a href="https://coveralls.io/github/firtadokei/codeigniter-vitejs?branch=master">
-			<img src="https://coveralls.io/repos/github/firtadokei/codeigniter-vitejs/badge.svg?branch=master" alt="Coverage Status" />
-		</a>
 		<img src="https://custom-icon-badges.herokuapp.com/packagist/stars/mihatori/codeignitervite?logo=star">
-		<img src="https://badges.hiptest.com:/packagist/dt/mihatori/codeignitervite?color=%23c700ff&logo=packagist&logoColor=%23c700ff">
-		<img src="https://custom-icon-badges.herokuapp.com/packagist/l/mihatori/codeignitervite?logo=law">
+		<a href="https://packagist.org/packages/mihatori/codeignitervite">
+			<img src="https://badges.hiptest.com:/packagist/dt/mihatori/codeignitervite?color=%23c700ff&logo=packagist&logoColor=%23c700ff">
+		</a>
+		<a href="LICENSE">
+			<img src="https://custom-icon-badges.herokuapp.com/packagist/l/mihatori/codeignitervite?logo=law">
+		</a>
 	</p>
 </div>
 
