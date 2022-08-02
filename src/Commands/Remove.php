@@ -9,9 +9,19 @@ use Throwable;
 
 class Remove extends BaseCommand
 {
-    protected $group        = 'Codeigniter Vite';
+    protected $group        = 'CodeIgniter Vite';
     protected $name         = 'vite:remove';
     protected $description  = 'Remove codeigniter vite generated files and settings';
+
+    /**
+     *  Module path
+     */
+    private string $path;
+
+    public function __construct()
+    {
+        $this->path = service('autoloader')->getNamespace('Mihatori\\CodeigniterVite')[0];
+    }
 
     public function run(array $params)
     {
@@ -19,7 +29,7 @@ class Remove extends BaseCommand
         CLI::write('Removing Codeigniter Vite 🔥⚡', 'white', 'red');
         CLI::newLine();
 
-        # Now let's remove vite files (vite.config.js, package.json & resources direction).
+        # Now let's remove vite files (vite.config.js, package.json ...etc).
         $this->removeFrameworkFiles();
 
         # Reset .env file.
@@ -31,29 +41,45 @@ class Remove extends BaseCommand
     }
 
     /**
-     * Remove vite files (vite.config.js, package.json & resources)
+     * Remove vite files (vite.config.js, package.json ...etc).
      * 
      * @return void
      */
     private function removeFrameworkFiles()
     {
+        helper('filesystem');
+
         CLI::write('Removing vite files...', 'yellow');
         CLI::newLine();
 
-        # First vite.config.js
-        is_file(ROOTPATH . 'vite.config.js') ? unlink(ROOTPATH . 'vite.config.js') : CLI::error('vite.config.js does not exist');
+        $framework = env('VITE_FRAMEWORK') ?? 'default';
 
-        # package.json
-        is_file(ROOTPATH . 'package.json') ? unlink(ROOTPATH . 'package.json') : CLI::error('package.json does not exist');
+        $frameworkFiles = directory_map($this->path . "frameworks/$framework", 1, true);
+
+        foreach ($frameworkFiles as $file)
+        {
+            # Remove resources|src dir.
+            if (is_file(ROOTPATH . $file))
+            {
+                unlink(ROOTPATH . $file);
+            }
+            elseif (is_dir(ROOTPATH . $file))
+            {
+                (new Publisher(null, ROOTPATH . $file))->wipe();
+            }
+            else
+            {
+                CLI::error("$file does not exist");
+            }
+        }
 
         # Remove package-lock.json
         is_file(ROOTPATH . 'package-lock.json') ? unlink(ROOTPATH . 'package-lock.json') : CLI::error('package-lock.json does not exist');
 
-        # Empty resources dir.
-        if (is_dir(ROOTPATH . 'resources'))
+        # Just in case user has changed the resources directory.
+        if (env('VITE_RESOURCES_DIR') && is_dir(ROOTPATH . env('VITE_RESOURCES_DIR')))
         {
-            $publisher = new Publisher(null, ROOTPATH . 'resources');
-            $publisher->wipe();
+            (new Publisher(null, ROOTPATH . env('VITE_RESOURCES_DIR')))->wipe();
         }
     }
 

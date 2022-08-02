@@ -9,7 +9,7 @@ use Throwable;
 
 class Init extends BaseCommand
 {
-    protected $group        = 'Codeigniter Vite';
+    protected $group        = 'CodeIgniter Vite';
     protected $name         = 'vite:init';
     protected $description  = 'Initialize codeigniter vite package';
 
@@ -18,6 +18,7 @@ class Init extends BaseCommand
      */
     private string $framework;
 
+    private array $supportedFrameworks = ['none', 'react', 'vue', 'svelte', 'sveltekit'];
 
     /**
      *  Module path
@@ -34,24 +35,24 @@ class Init extends BaseCommand
     public function run(array $params)
     {
         # Module start.
-        CLI::write('Initializing Codeigniter Vite 🔥⚡', 'white', 'cyan');
+        CLI::write('Initializing Codeigniter Vite Package 🔥⚡', 'white', 'cyan');
         CLI::newLine();
 
         # Set framework.
-        $this->framework = $params['framework'] ?? CLI::prompt('Choose a framework: ', ['none', 'vue', 'react', 'svelte']);
+        $this->framework = $params['framework'] ?? CLI::prompt('Choose a framework: ', $this->supportedFrameworks);
         CLI::newLine();
 
-        # First, what if user select a none supported framework ?!
+        # But, what if user select a none supported framework ?!
         # if that's true, return an error message with available frameworks.
-        if (!in_array($this->framework, ['none', 'vue', 'react', 'svelte']))
+        if (!in_array($this->framework, $this->supportedFrameworks))
         {
             CLI::error("❌ Sorry, but $this->framework is not supported!");
-            CLI::error('Available frameworks are: ' . CLI::color('vue, react and svelte', 'green'));
+            CLI::error('Available frameworks are: ' . CLI::color(implode(', ', $this->supportedFrameworks), 'green'));
             CLI::newLine();
             return;
         }
 
-        # Now let's generate vite necesary files (vite.config.js, package.json & resources direction).
+        # Now let's generate vite necesary files (vite.config.js, package.json ...etc).
         $this->generateFrameworkFiles();
 
         # Update .env file.
@@ -65,31 +66,28 @@ class Init extends BaseCommand
     }
 
     /**
-     * Generate vite files (vite.config.js, package.json & resources)
+     * Generate vite files (vite.config.js, package.json & resources ...etc)
      * 
      * @return void
      */
     private function generateFrameworkFiles()
     {
+        helper('filesystem');
+
         CLI::write('⚡ Generating vite files...', 'yellow');
         CLI::newLine();
 
         # Framework files.
-        $paths = ['vite.config.js', 'package.json', 'resources'];
+        $frameworkPath = ($this->framework === 'none') ? 'frameworks/default' : "frameworks/$this->framework";
 
-        if ($this->framework === 'none')
-        {
-            $publisher = new Publisher($this->path . 'Config/default', ROOTPATH);
-        }
-        else
-        {
-            $publisher = new Publisher($this->path . "Config/$this->framework", ROOTPATH);
-        }
+        $frameworkFiles = directory_map($this->path . $frameworkPath, 1, true);
+
+        $publisher = new Publisher($this->path . "$frameworkPath", ROOTPATH);
 
         # Publish them.
         try
         {
-            $publisher->addPaths($paths)->merge(true);
+            $publisher->addPaths($frameworkFiles)->merge(true);
         }
         catch (Throwable $e)
         {
@@ -157,6 +155,14 @@ class Init extends BaseCommand
             {
                 $envContent = file_get_contents($envFile);
                 $updates = str_replace("VITE_ENTRY_FILE='main.js'", "VITE_ENTRY_FILE='main.jsx'", $envContent);
+                file_put_contents($envFile, $updates);
+            }
+
+            # SvelteKit src directory.
+            if ($this->framework === 'sveltekit')
+            {
+                $envContent = file_get_contents($envFile);
+                $updates = str_replace("VITE_RESOURCES_DIR='resources'", "VITE_RESOURCES_DIR='src'", $envContent);
                 file_put_contents($envFile, $updates);
             }
         }

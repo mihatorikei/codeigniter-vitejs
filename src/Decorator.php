@@ -21,13 +21,13 @@ class Decorator implements ViewDecoratorInterface
             # Close the div
             $html = str_replace('</body>', "\n\t</div>\n</body>", $html);
 
-            # Get generated css.
+            # Get bundled assets.
             $tags = Vite::tags();
 
             $jsTags  = $tags['js'];
 
             # now inject css
-            if (!empty($tags['css']))
+            if (!empty($tags['css']) && env('VITE_FRAMEWORK') !== 'sveltekit')
             {
                 $cssTags = $tags['css'];
 
