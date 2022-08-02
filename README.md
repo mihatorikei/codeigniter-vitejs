@@ -2,6 +2,7 @@
 	<img width="160px" src="src/logo.png">
   	<h1>Codeigniter + viteJs</h1>
   	<p>Vitejs Integration For Codeigniter4</p>
+	<p><strong>(v2 beta)</strong></p>
 	<p>
 		<a href="https://github.com/firtadokei/codeigniter-vitejs/releases">
 			<img src="https://custom-icon-badges.herokuapp.com/github/v/release/firtadokei/codeigniter-vitejs?logo=tag">
