@@ -22,7 +22,7 @@ Codeigniter vite is a package that aims to integrate [vitejs](https://vitejs.dev
  - ⏱️ Almost zero configuration
  - 🧩 Easy to install and remove
  - 🔨 Easy to customize
- - ✌️ Support most used frameworks: `react`, `vue`, and `svlete`
+ - ✌️ Support most used frameworks: `react`, `vue`, `svlete` and **`SvelteKit`** 🎉
  - 🔥 Enjoy hot module replacement (HMR)
  
 ## Installation:

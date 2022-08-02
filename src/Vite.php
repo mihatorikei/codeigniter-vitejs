@@ -48,9 +48,29 @@ class Vite
                 $fileExtension = substr($file->file, -3, 3);
 
                 # Generate js tag.
-                if ($fileExtension === '.js' && isset($file->isEntry) && $file->isEntry === true)
+                if ($fileExtension === '.js' && isset($file->isEntry) && $file->isEntry === true && (!isset($file->isDynamicEntry) || $file->isDynamicEntry !== true))
                 {
-                    $result['js'] .= '<script type="module" src="/' . $file->file . '"></script>';
+                    # SvelteKit requires this small module.
+                    if (env('VITE_FRAMEWORK') == 'sveltekit')
+                    {
+                        $result['js'] = "
+                            <script type='module'>
+                                import { start } from '/" . $file->file . "';
+                                start({
+                                    target: document.querySelector('#app'),
+                                    paths: {
+                                        base: '',
+                                        assets: ''
+                                    },
+                                    route: true,
+                                    spa: true,
+                                })
+                            </script>";
+                    }
+                    else
+                    {
+                        $result['js'] .= '<script type="module" src="/' . $file->file . '"></script>';
+                    }
                 }
 
                 if (!empty($file->css))
@@ -69,7 +89,7 @@ class Vite
     /**
      * Enable HMR for react.
      * 
-     * @see https://v2.vitejs.dev/guide/backend-integration.html
+     * @see https://vitejs.dev/guide/backend-integration.html
      * 
      * @return string|null a simple module script
      */
