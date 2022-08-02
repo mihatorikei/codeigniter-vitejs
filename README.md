@@ -27,8 +27,10 @@ Codeigniter vite is a package that aims to integrate [vitejs](https://vitejs.dev
  
 ## Installation:
 
+> if you are using v1, please make sure to remove it first.
+
 ```
-composer require mihatori/codeignitervite
+composer require mihatori/codeignitervite:2.0.0-beta
 ```
 
 then from your project root, run:
@@ -37,7 +39,7 @@ then from your project root, run:
 php spark vite:init --framework <framework>
 ```
 
-replace `<framework>` with `vue`, `react`, `svelte`, or `none`
+replace `<framework>` with `vue`, `react`, `svelte`, `sveltekit` or `none`
 
 or you can just run:
 
