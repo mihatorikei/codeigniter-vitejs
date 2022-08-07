@@ -7,4 +7,4 @@ assignees: ''
 
 ---
 
-To suggest a new feature, please feel free to open a new [discussion](https://github.com/firtadokei/codeigniter-vitejs/discussions).
+To suggest a new feature, please feel free to start a new [discussion](https://github.com/firtadokei/codeigniter-vitejs/discussions).
