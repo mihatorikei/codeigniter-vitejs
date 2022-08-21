@@ -9,7 +9,7 @@ class Decorator implements ViewDecoratorInterface
     public static function decorate(string $html): string
     {
         # Check whether vite is running or manifest is ready.
-        if (env('VITE_AUTO_INJECTING'))
+        if (env('VITE_AUTO_INJECTING') && Vite::routeIsNotExluded() )
         {
             if (Vite::isReady() === false)
             {
@@ -21,7 +21,7 @@ class Decorator implements ViewDecoratorInterface
             # Close the div
             $html = str_replace('</body>', "\n\t</div>\n</body>", $html);
 
-            # Get generated css.
+            # Get generated tags.
             $tags = Vite::tags();
 
             $jsTags  = $tags['js'];
