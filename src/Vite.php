@@ -48,7 +48,7 @@ class Vite
                 $fileExtension = substr($file->file, -3, 3);
 
                 # Generate js tag.
-                if ($fileExtension === '.js' && isset($file->isEntry) && $file->isEntry === true)
+                if ($fileExtension === '.js' && isset($file->isEntry) && $file->isEntry === true && (!isset($file->isDynamicEntry) || $file->isDynamicEntry !== true))
                 {
                     $result['js'] .= '<script type="module" src="/' . $file->file . '"></script>';
                 }
@@ -69,7 +69,7 @@ class Vite
     /**
      * Enable HMR for react.
      * 
-     * @see https://v2.vitejs.dev/guide/backend-integration.html
+     * @see https://vitejs.dev/guide/backend-integration.html
      * 
      * @return string|null a simple module script
      */
@@ -109,4 +109,19 @@ class Vite
 
         return $result;
     }
+
+	/**
+	 * Check whether the current route is exluded or not.
+	 * 
+	 * @return bool
+	 */
+	public static function routeIsNotExluded(): bool
+	{
+		$routes = explode(',', env('VITE_EXLUDED_ROUTES'));
+		
+		# remove spaces before and after the route.
+		// foreach($routes as $i => $route) $routes[$i] = ltrim( rtrim($route) );
+
+		return !in_array(uri_string(), $routes);
+	}
 }

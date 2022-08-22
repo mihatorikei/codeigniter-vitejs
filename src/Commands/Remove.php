@@ -9,80 +9,97 @@ use Throwable;
 
 class Remove extends BaseCommand
 {
-    protected $group        = 'Codeigniter Vite';
-    protected $name         = 'vite:remove';
-    protected $description  = 'Remove codeigniter vite generated files and settings';
+	protected $group        = 'CodeIgniter Vite';
+	protected $name         = 'vite:remove';
+	protected $description  = 'Remove codeigniter vite generated files and settings';
 
-    public function run(array $params)
-    {
-        # cleaning start.
-        CLI::write('Removing Codeigniter Vite 🔥⚡', 'white', 'red');
-        CLI::newLine();
+	/**
+	 *  Module path
+	 */
+	private string $path;
 
-        # Now let's remove vite files (vite.config.js, package.json & resources direction).
-        $this->removeFrameworkFiles();
+	public function __construct()
+	{
+		$this->path = service('autoloader')->getNamespace('Mihatori\\CodeigniterVite')[0];
+	}
 
-        # Reset .env file.
-        $this->resetEnvFile();
+	public function run(array $params)
+	{
+		# cleaning start.
+		CLI::write('Removing Codeigniter Vite 🔥⚡', 'white', 'red');
+		CLI::newLine();
 
-        # Everything is ready now.
-        CLI::write('Codeigniter vite has removed successfuly ✅', 'green');
-        CLI::newLine();
-    }
+		# Now let's remove vite files (vite.config.js, package.json ...etc).
+		$this->removeFrameworkFiles();
 
-    /**
-     * Remove vite files (vite.config.js, package.json & resources)
-     * 
-     * @return void
-     */
-    private function removeFrameworkFiles()
-    {
-        CLI::write('Removing vite files...', 'yellow');
-        CLI::newLine();
+		# Reset .env file.
+		$this->resetEnvFile();
 
-        # First vite.config.js
-        is_file(ROOTPATH . 'vite.config.js') ? unlink(ROOTPATH . 'vite.config.js') : CLI::error('vite.config.js does not exist');
+		# Everything is ready now.
+		CLI::write('Codeigniter vite has removed successfuly ✅', 'green');
+		CLI::newLine();
+	}
 
-        # package.json
-        is_file(ROOTPATH . 'package.json') ? unlink(ROOTPATH . 'package.json') : CLI::error('package.json does not exist');
+	/**
+	 * Remove vite files (vite.config.js, package.json ...etc).
+	 * 
+	 * @return void
+	 */
+	private function removeFrameworkFiles()
+	{
+		helper('filesystem');
 
-        # Remove package-lock.json
-        is_file(ROOTPATH . 'package-lock.json') ? unlink(ROOTPATH . 'package-lock.json') : CLI::error('package-lock.json does not exist');
+		CLI::write('Removing vite files...', 'yellow');
+		CLI::newLine();
 
-        # Empty resources dir.
-        if (is_dir(ROOTPATH . 'resources'))
-        {
-            $publisher = new Publisher(null, ROOTPATH . 'resources');
-            $publisher->wipe();
-        }
-    }
+		$framework = env('VITE_FRAMEWORK') ?? 'default';
 
-    /**
-     * Remove vite configs in .env file
-     * 
-     * @return void
-     */
-    private function resetEnvFile()
-    {
-        CLI::write('Reseting .env file...', 'yellow');
-        CLI::newLine();
+		$frameworkFiles = directory_map($this->path . "frameworks/$framework", 1, true);
 
-        # Get the env file.
-        $envFile = ROOTPATH . '.env';
-        # Get last backup.
-        $backupFile = ROOTPATH . env('VITE_BACKUP_FILE');
+		foreach ($frameworkFiles as $file) {
+			# Remove resources|src dir.
+			if (is_file(ROOTPATH . $file)) {
+				unlink(ROOTPATH . $file);
+			} elseif (is_dir(ROOTPATH . $file)) {
+				(new Publisher(null, ROOTPATH . $file))->wipe();
+			} else {
+				CLI::error("$file does not exist");
+			}
+		}
 
-        # Does exist? if not, generate it =)
-        if (is_file($backupFile))
-        {
-            # Remove current .env
-            unlink($envFile);
-            # Restore backup if exists
-            if (is_file($backupFile))
-            {
-                copy($backupFile, ROOTPATH . '.env');
-                unlink($backupFile);
-            }
-        }
-    }
+		# Remove package-lock.json
+		is_file(ROOTPATH . 'package-lock.json') ? unlink(ROOTPATH . 'package-lock.json') : CLI::error('package-lock.json does not exist');
+
+		# Just in case user has changed the resources directory.
+		if (env('VITE_RESOURCES_DIR') && is_dir(ROOTPATH . env('VITE_RESOURCES_DIR'))) {
+			(new Publisher(null, ROOTPATH . env('VITE_RESOURCES_DIR')))->wipe();
+		}
+	}
+
+	/**
+	 * Remove vite configs in .env file
+	 * 
+	 * @return void
+	 */
+	private function resetEnvFile()
+	{
+		CLI::write('Reseting .env file...', 'yellow');
+		CLI::newLine();
+
+		# Get the env file.
+		$envFile = ROOTPATH . '.env';
+		# Get last backup.
+		$backupFile = ROOTPATH . env('VITE_BACKUP_FILE');
+
+		# Does exist? if not, generate it =)
+		if (is_file($backupFile)) {
+			# Remove current .env
+			unlink($envFile);
+			# Restore backup if exists
+			if (is_file($backupFile)) {
+				copy($backupFile, ROOTPATH . '.env');
+				unlink($backupFile);
+			}
+		}
+	}
 }
