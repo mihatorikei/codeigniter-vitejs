@@ -6,7 +6,10 @@
 		<a href="https://github.com/firtadokei/codeigniter-vitejs/releases">
 			<img src="https://custom-icon-badges.herokuapp.com/github/v/release/firtadokei/codeigniter-vitejs?logo=tag">
 		</a>
-		<img src="https://custom-icon-badges.herokuapp.com/packagist/stars/mihatori/codeignitervite?logo=star">
+		<a href="https://github.com/vitejs/awesome-vite#codeigniter">
+<img src="https://awesome.re/mentioned-badge.svg">
+</a>
+<img src="https://custom-icon-badges.herokuapp.com/packagist/stars/mihatori/codeignitervite?logo=star">
 		<a href="https://packagist.org/packages/mihatori/codeignitervite">
 			<img src="https://badges.hiptest.com:/packagist/dt/mihatori/codeignitervite?color=%23c700ff&logo=packagist&logoColor=%23c700ff">
 		</a>
