@@ -5,6 +5,8 @@ use Mihatori\CodeigniterVite\Vite;
 /**
  * Get vite entry file or bundled files.
  * 
+ * @param string js or css
+ * 
  * @return string|null
  */
 function viteTags(string $assets): ?string

@@ -69,7 +69,7 @@ class Init extends BaseCommand
 		CLI::newLine();
 
 		# Framework files.
-		$frameworkPath = ($this->framework === 'none') ? 'frameworks/default' : "frameworks/$this->framework";
+		$frameworkPath = ($this->framework === 'none') ? 'Frameworks/default' : "Frameworks/$this->framework";
 
 		$frameworkFiles = directory_map($this->path . $frameworkPath, 1, true);
 
