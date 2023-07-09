@@ -48,7 +48,7 @@ or you can just run:
 php spark vite:init
 ```
 
-our body `spark` will handle the rest for you 🙃
+our buddy `spark` will handle the rest for you 🙃
 
 ## Getting Started:
 - Install your node dependencies: `npm install`
